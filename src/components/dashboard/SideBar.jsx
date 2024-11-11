@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { FaStore } from "react-icons/fa";
 const SideBar = () => {
@@ -72,8 +72,8 @@ const SideBar = () => {
                   }}
                   key={i}
                 >
-                  <a
-                    href={e.href}
+                  <Link
+                    to={e.href}
                     className={`flex  ${
                       pageName == e.href
                         ? "text-white bg-primary"
@@ -91,7 +91,7 @@ const SideBar = () => {
                     </div>
 
                     {e.title}
-                  </a>
+                  </Link>
                 </li>
               );
             })}

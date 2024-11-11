@@ -1,11 +1,13 @@
 /* eslint-disable react/prop-types */
 import { useSelector } from "react-redux";
-
+import { toast } from "react-toastify";
 import CartItem from "./CartItem";
+import { clearCart } from "../../redux/slices/cartSlice";
+import { useDispatch } from "react-redux";
 const CartModal = ({ onClose }) => {
   const cartItems = useSelector((state) => state.cart.items);
   let totalOrderPrice = 0;
-
+  const dispatch = useDispatch();
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white rounded-lg shadow-lg px-2 py-6 w-full max-w-2xl mx-1 text-black">
@@ -34,7 +36,14 @@ const CartModal = ({ onClose }) => {
               </div>
               <button
                 className="w-full bg-primary hover:bg-blue-600 text-white py-2 rounded-lg"
-                onClick={onClose}
+                onClick={() => {
+                  toast.success("Succses", {
+                    position: "top-right",
+                    autoClose: 3000,
+                  });
+                  dispatch(clearCart());
+                  onClose();
+                }}
               >
                 buy
               </button>
